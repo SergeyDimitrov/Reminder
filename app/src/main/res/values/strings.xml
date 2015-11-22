@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Reminder</string>
+
+    <string name="save_button_text">Save</string>
+    <string name="title_text">Title: </string>
+    <string name="date_text">Date: </string>
+    <string name="time_text">Time: </string>
+    <string name="description_text">Description: </string>
+    <string name="no_data_error">No data</string>
+    <string name="success">Alarm is set</string>
+</resources>
