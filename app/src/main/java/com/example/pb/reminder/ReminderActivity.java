@@ -28,6 +28,8 @@ import java.util.Date;
 
 public class ReminderActivity extends AppCompatActivity {
 
+    public static final String APP_TAG = "reminder_app_tag";
+
     private SharedPreferences settings;
 
     private EditText titleView;
@@ -42,9 +44,8 @@ public class ReminderActivity extends AppCompatActivity {
     private int day, month, year, hour, minute;
 
     private boolean isDataOk() {
-        if (descriptionView.getText().toString().equals("") || titleView.getText().toString().equals("")
-                || timeView.getText().toString().equals("") || dateView.getText().toString().equals("")) return false;
-        else return true;
+        return !(descriptionView.getText().toString().equals("") || titleView.getText().toString().equals("")
+                || timeView.getText().toString().equals("") || dateView.getText().toString().equals(""));
     }
 
     private long saveData() {
@@ -150,7 +151,7 @@ public class ReminderActivity extends AppCompatActivity {
         }
         return null;
     }
-    
+
     public static void enableReceiver(boolean enable, Context context) {
         int flag = enable ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
 

@@ -8,6 +8,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.PowerManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -20,6 +21,7 @@ public class ReminderReceiver extends BroadcastReceiver {
     public static final String APP_PREFERENCES_TIME = "time";
     public static final String APP_PREFERENCES_DESCRIPTION = "description";
 
+
     public ReminderReceiver() {
     }
 
@@ -27,10 +29,11 @@ public class ReminderReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         SharedPreferences settings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 
-        if (intent.getAction() == Intent.ACTION_BOOT_COMPLETED) {
+        if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
             setAlarm(context, settings.getLong(APP_PREFERENCES_TIME, 0));
             Log.d("myTAG", "Boot completed");
         } else {
+            WakeLocker.acquire(context);
             NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                     .setTicker(settings.getString(APP_PREFERENCES_TITLE, ""))
